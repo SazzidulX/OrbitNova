@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitNova - 230+ Advanced Free Utility & AI Tools</title>
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === CSS Variables === */
+        :root {
+            --primary: #5850ec; --primary-hover: #4338ca;
+            --secondary: #ec4899; --text-dark: #0f172a;
+            --text-gray: #475569; --text-light: #94a3b8;
+            --bg-main: #ffffff; --bg-gray: #f8fafc;
+            --border-color: #e2e8f0; --font-main: 'Inter', sans-serif;
+            --container-width: 1300px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Smooth scrolling & Padding for sticky header */
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+        /* 🔥 Premium Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        body { font-family: var(--font-main); color: var(--text-dark); background-color: var(--bg-main); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s; }
+        ul { list-style: none; }
+
+        /* === Header === */
+        header { padding: 15px 0; border-bottom: 1px solid rgba(226, 232, 240, 0.6); background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; font-weight: 800; font-size: 1.6rem; color: var(--text-dark); letter-spacing: -0.5px; gap: 8px;}
+        
+        /* Updated Desktop Nav */
+        .nav-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center;}
+        .nav-links a { font-weight: 600; font-size: 0.9rem; color: var(--text-gray); transition: 0.3s; padding: 5px 8px; border-radius: 6px;}
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: rgba(88, 80, 236, 0.05); }
+        
+        .mobile-menu-btn { display: none; font-size: 1.6rem; color: var(--text-dark); background: none; border: none; cursor: pointer; padding: 5px; transition: 0.3s; }
+        
+        /* Mobile Menu */
+        .mobile-dropdown { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.1); padding: 15px 25px 25px; position: absolute; top: 70px; left: 0; width: 100%; display: flex; flex-direction: column; transform-origin: top; transform: scaleY(0); opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99; max-height: 80vh; overflow-y: auto;}
+        .mobile-dropdown.active { transform: scaleY(1); opacity: 1; visibility: visible; }
+        .mobile-dropdown a { padding: 12px 15px; font-weight: 600; color: var(--text-dark); border-bottom: 1px solid rgba(0,0,0,0.04); transition: 0.3s; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+        .mobile-dropdown a i { color: var(--primary); width: 20px; text-align: center; }
+        .mobile-dropdown a:hover { background: rgba(88, 80, 236, 0.05); color: var(--primary); padding-left: 20px;}
+
+        /* === Hero Section === */
+        .hero { padding: 100px 0 80px; text-align: center; position: relative; overflow: hidden; background: var(--bg-gray); }
+        .hero-shape { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; opacity: 0.5; animation: floatShape 10s infinite alternate ease-in-out; pointer-events: none;}
+        .shape-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: -100px; }
+        .shape-2 { width: 350px; height: 350px; background: var(--secondary); bottom: -100px; right: -50px; animation-delay: -5s; }
+        @keyframes floatShape { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(40px) scale(1.1); } }
+        .hero .container { position: relative; z-index: 1; }
+
+        .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border: 1px solid rgba(88, 80, 236, 0.2); color: var(--primary); font-size: 0.85rem; font-weight: 700; padding: 8px 18px; border-radius: 30px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(88, 80, 236, 0.05); }
+        .hero h1 { font-size: 4.2rem; line-height: 1.1; font-weight: 900; margin-bottom: 25px; color: var(--text-dark); letter-spacing: -1.5px; }
+        .hero h1 span { background: linear-gradient(to right, var(--primary), var(--secondary), #f59e0b, var(--primary)); background-size: 300% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 6s ease-in-out infinite; }
+        .hero p { color: var(--text-gray); font-size: 1.15rem; margin: 0 auto 40px; max-width: 650px; font-weight: 500; line-height: 1.6;}
+        
+        .search-box { display: flex; background: white; border: 1.5px solid var(--border-color); border-radius: 50px; padding: 8px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04); margin: 0 auto; max-width: 650px; transition: all 0.3s ease; position: relative; }
+        .search-box:focus-within { border-color: var(--primary); box-shadow: 0 20px 40px rgba(88, 80, 236, 0.15); transform: translateY(-2px); }
+        .search-box input { flex: 1; border: none; outline: none; padding: 0 15px 0 20px; font-size: 1.05rem; font-family: inherit; border-radius: 50px; background: transparent; color: var(--text-dark); font-weight: 500;}
+        .search-box button { border-radius: 40px; padding: 12px 35px; font-size: 1rem; border: none; color: white; background: linear-gradient(135deg, var(--primary), #818cf8); box-shadow: 0 5px 15px rgba(88, 80, 236, 0.3); font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .search-box button:hover { box-shadow: 0 8px 25px rgba(88, 80, 236, 0.5); transform: translateY(-2px) scale(1.02); }
+
+        .hero-stats { display: flex; justify-content: center; gap: 15px; margin-top: 40px; flex-wrap: wrap; }
+        .stat-item { display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 50px; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 700; color: var(--text-gray); box-shadow: 0 5px 15px rgba(0,0,0,0.02); transition: 0.3s; }
+        .stat-item:hover { transform: translateY(-3px); background: white; color: var(--text-dark); box-shadow: 0 10px 20px rgba(0,0,0,0.05);}
+        .stat-item i { color: var(--primary); }
+
+        /* === Tools Grid === */
+        .tools-container { padding: 60px 0; background: var(--bg-main); position: relative; z-index: 2;}
+        
+        /* Note: content-visibility & contain-intrinsic-size REMOVED to fix the loading issue instantly */
+        .category-section { margin-bottom: 70px; scroll-margin-top: 100px; } 
+        
+        .category-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: var(--text-dark); display: flex; align-items: center; gap: 15px; }
+        .category-title i { background: var(--bg-gray); width: 50px; height: 50px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-color);}
+
+        /* Category Icon Colors */
+        .cat-ai i { color: #8b5cf6; border-color: #c4b5fd; background: #f3e8ff;}
+        .cat-pdf i { color: #ef4444; } .cat-print i { color: #f97316; } .cat-img i { color: #10b981; } .cat-txt i { color: #8b5cf6; } .cat-fin i { color: #3b82f6; } .cat-stu i { color: #ec4899; } .cat-web i { color: #6366f1; } .cat-daily i { color: #14b8a6; } .cat-sec i { color: #475569; }
+
+        .tool-grid-advanced { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        
+        .tool-card { display: flex; align-items: flex-start; gap: 15px; padding: 22px; background: var(--bg-main); border: 1.5px solid var(--border-color); border-radius: 16px; transition: all 0.3s ease; text-decoration: none; position: relative; overflow: hidden; will-change: transform, border-color, box-shadow; }
+        .tool-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(88, 80, 236, 0.08); }
+        
+        .tool-icon-box { width: 55px; height: 55px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; flex-shrink: 0; transition: 0.3s; will-change: transform; }
+        .tool-card:hover .tool-icon-box { transform: scale(1.1) rotate(5deg); }
+
+        .bg-neon { background: linear-gradient(135deg, #8b5cf6, #3b82f6); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); } 
+        .bg-red { background-color: #ef4444; } .bg-orange { background-color: #f97316; } .bg-green { background-color: #10b981; } .bg-purple { background-color: #8b5cf6; } .bg-blue { background-color: #3b82f6; } .bg-pink { background-color: #ec4899; } .bg-indigo { background-color: #6366f1; } .bg-teal { background-color: #14b8a6; } .bg-gray-dark { background-color: #475569; }
+
+        .tool-info { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .tool-info h3 { font-weight: 700; font-size: 1.15rem; color: var(--text-dark); margin: 0; transition: color 0.3s;}
+        .tool-info p { font-size: 0.9rem; color: var(--text-gray); margin: 0; line-height: 1.4; font-weight: 500;}
+        .tool-card:hover .tool-info h3 { color: var(--primary); }
+
+        .tool-arrow { color: var(--text-light); font-size: 1rem; align-self: center; transition: 0.3s; margin-left: 5px; opacity: 0; transform: translateX(-10px);}
+        .tool-card:hover .tool-arrow { opacity: 1; color: var(--primary); transform: translateX(0); }
+        .no-results { display: none; text-align: center; padding: 50px 0; color: var(--text-gray); font-size: 1.2rem; font-weight: 500; }
+
+        /* === Upcoming Subscription Section === */
+        .subscription-section { padding: 80px 0; background: linear-gradient(to bottom, #ffffff, #f8fafc); border-top: 1px solid var(--border-color); text-align: center; }
+        .subs-header h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 15px; color: var(--text-dark); }
+        .subs-header p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        /* Banner Offer */
+        .subs-offer-banner { display: inline-block; background: rgba(236, 72, 153, 0.1); color: var(--secondary); border: 1px solid rgba(236, 72, 153, 0.3); padding: 10px 25px; border-radius: 30px; font-weight: 700; font-size: 1rem; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(236, 72, 153, 0.1); animation: pulseOffer 2s infinite; }
+        @keyframes pulseOffer { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        /* Grid for 5 cards: 3 top, 2 bottom centered */
+        .pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+        .pricing-card { background: white; border: 1.5px solid var(--border-color); border-radius: 20px; padding: 35px 25px; width: 300px; text-align: left; position: relative; transition: all 0.3s; display: flex; flex-direction: column; }
+        .pricing-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(88, 80, 236, 0.1); border-color: var(--primary); }
+        .pricing-card.popular { border: 2px solid var(--primary); transform: scale(1.02); }
+        .pricing-card.popular:hover { transform: scale(1.02) translateY(-10px); }
+        
+        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 5px 15px; font-size: 0.8rem; font-weight: 800; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; }
+        .plan-name { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; }
+        .plan-price { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 20px; }
+        .plan-price span { font-size: 1rem; color: var(--text-gray); font-weight: 500; }
+        
+        .plan-features { list-style: none; margin-bottom: 30px; flex-grow: 1;}
+        .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: var(--text-gray); margin-bottom: 12px; font-weight: 500; }
+        .plan-features li i { color: #10b981; margin-top: 3px; font-size: 0.9rem;}
+        
+        .notify-btn { display: block; width: 100%; text-align: center; padding: 14px; background: var(--bg-gray); color: var(--text-dark); border: 1.5px solid var(--border-color); border-radius: 12px; font-weight: 700; font-size: 1rem; transition: 0.3s; cursor: pointer; text-decoration: none;}
+        .notify-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .popular .notify-btn { background: var(--primary); color: white; }
+        .popular .notify-btn:hover { background: var(--primary-hover); }
+
+        /* === Footer === */
+        footer { background: var(--bg-gray); padding: 80px 0 0; border-top: 1px solid var(--border-color); text-align: left !important; }
+        .footer-top-section { display: flex; flex-direction: column; gap: 50px; margin-bottom: 50px; }
+        .brand-intro { max-width: 900px; }
+        .brand-intro .logo { font-size: 2rem; font-weight: 900; color: var(--text-dark); display: inline-block; margin-bottom: 20px;}
+        .brand-intro p { color: var(--text-gray); font-size: 1.1rem; line-height: 1.8; font-weight: 500;}
+        .footer-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;}
+        .footer-col ul { display: flex; flex-direction: column; gap: 15px; }
+        .footer-col ul a { color: var(--text-gray); font-size: 0.95rem; font-weight: 500; transition: 0.3s;}
+        .footer-col ul a:hover { color: var(--primary); padding-left: 5px; font-weight: 600;}
+        
+        .footer-bottom-container { background: white; padding: 35px 0; border-top: 1px solid var(--border-color); margin-top: 40px;}
+        .footer-bottom-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 6px; }
+        .fb-copy { color: var(--text-dark); font-size: 1.05rem; font-weight: 500; }
+        .fb-copy strong { font-weight: 800; }
+        .fb-subtext { color: var(--text-gray); font-size: 0.9rem; font-weight: 500; margin-bottom: 8px; }
+        .fb-powered { color: var(--text-dark); font-size: 0.95rem; font-weight: 600; }
+        .corp-name { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: 0.5px; }
+
+        /* Media Queries */
+        @media (max-width: 1024px) { 
+            .nav-links { display: none; } .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 3.5rem; } .shape-1 { width: 300px; height: 300px; } 
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 60px 0; } .hero h1 { font-size: 2.8rem; }
+            .tool-grid-advanced { grid-template-columns: 1fr; }
+            .search-box button { padding: 12px 25px;} .hero-stats { gap: 10px; }
+            .pricing-card { width: 100%; max-width: 400px; } 
+            .pricing-card.popular { transform: scale(1); }
+        }
+        @media (max-width: 480px) {
+            .search-box { flex-direction: column; border: none; box-shadow: none; padding: 0; background: transparent;}
+            .search-box input { border: 1.5px solid var(--border-color); padding: 16px 20px; margin-bottom: 12px; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.03);}
+            .search-box button { justify-content: center; padding: 16px; font-size: 1.05rem;}
+            .hero h1 { font-size: 2.3rem; }
+            .subs-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#top" class="logo">🚀 OrbitNova</a>
+            
+            <!-- Full Categories in Desktop Nav -->
+            <ul class="nav-links">
+                <li><a href="#top" class="active">Home</a></li>
+                <li><a href="#ai">AI Tools</a></li>
+                <li><a href="#pdf">PDF</a></li>
+                <li><a href="#student">Student</a></li>
+                <li><a href="#print">Print</a></li>
+                <li><a href="#image">Image</a></li>
+                <li><a href="#text">Text</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#dev">Developer</a></li>
+                <li><a href="#utility">Utility</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#about" style="color:var(--primary);">About</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="mobile-menu-btn" id="menu-toggle"><i class="fa-solid fa-bars-staggered"></i></button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown" id="mobile-menu">
+            <a href="#top"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#ai"><i class="fa-solid fa-robot"></i> AI Super Tools</a>
+            <a href="#pdf"><i class="fa-solid fa-file-pdf"></i> PDF Tools</a>
+            <a href="#student"><i class="fa-solid fa-graduation-cap"></i> Student Tools</a>
+            <a href="#print"><i class="fa-solid fa-print"></i> Print & Cafe</a>
+            <a href="#image"><i class="fa-regular fa-image"></i> Image Tools</a>
+            <a href="#text"><i class="fa-solid fa-font"></i> Text Tools</a>
+            <a href="#finance"><i class="fa-solid fa-coins"></i> Finance & Business</a>
+            <a href="#dev"><i class="fa-solid fa-code"></i> Developer Kit</a>
+            <a href="#utility"><i class="fa-solid fa-clock"></i> Daily Utility</a>
+            <a href="#security"><i class="fa-solid fa-shield-halved"></i> Security</a>
+            <a href="#about"><i class="fa-solid fa-circle-info"></i> About OrbitNova</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        
+        <div class="container">
+            <span class="hero-tag"><i class="fa-solid fa-bolt" style="color: #fbbf24;"></i> 240+ Premium Tools, 100% Free</span>
+            <h1>The Ultimate Workspace <br>For <span>Everyone</span></h1>
+            <p>Edit PDFs, optimize images, manage documents, and use powerful AI & online utilities — all in one smart workspace.</p>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for AI Content, PDF, Image, Finance tools...">
+                <button class="btn" onclick="document.getElementById('searchInput').focus();">
+                    Search
+                </button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item"><i class="fa-solid fa-layer-group"></i> 240+ Tools</div>
+                <div class="stat-item"><i class="fa-solid fa-check-double"></i> 100% Free</div>
+                <div class="stat-item"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Ready</div>
+                <div class="stat-item"><i class="fa-solid fa-microchip"></i> AI Powered</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Tools List -->
+    <div class="tools-container">
+        <div class="container">
+            
+            <div id="noResults" class="no-results">
+                <i class="fa-solid fa-face-frown-open" style="font-size: 3rem; margin-bottom: 10px; color: var(--text-light);"></i>
+                <p>Sorry, we couldn't find any tool matching your search.</p>
+            </div>
+
+            <!-- 0. AI SUPER TOOLS -->
+            <div class="category-section" id="ai">
+                <h2 class="category-title cat-ai"><i class="fa-solid fa-robot"></i> AI Super Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- AI Content Tools (Existing kept intact) -->
+                    <a href="/ai-title-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-heading"></i></div><div class="tool-info"><h3>AI Title Generator</h3><p>Generate catchy and viral titles for your content.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-tag-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-tags"></i></div><div class="tool-info"><h3>AI Tag Generator</h3><p>Find trending SEO tags for blogs and YouTube.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-description-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-align-left"></i></div><div class="tool-info"><h3>AI Description Generator</h3><p>Write perfect SEO descriptions instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-blog-writer" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-pen-nib"></i></div><div class="tool-info"><h3>AI Blog Writer</h3><p>Generate full SEO optimized blog articles.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-article-rewriter" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-arrows-spin"></i></div><div class="tool-info"><h3>AI Article Rewriter</h3><p>Paraphrase and make content plagiarism-free.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-paragraph-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-paragraph"></i></div><div class="tool-info"><h3>AI Paragraph Generator</h3><p>Expand short ideas into professional paragraphs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-script-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-clapperboard"></i></div><div class="tool-info"><h3>AI Script Generator</h3><p>Write engaging scripts for YouTube & Reels.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-story-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-book"></i></div><div class="tool-info"><h3>AI Story Generator</h3><p>Create creative fiction and short stories.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-caption-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-comment-dots"></i></div><div class="tool-info"><h3>AI Caption Generator</h3><p>Write viral Instagram and Facebook captions.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-hashtag-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-hashtag"></i></div><div class="tool-info"><h3>AI Hashtag Generator</h3><p>Get best performing hashtags for maximum reach.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-product-description" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-cart-shopping"></i></div><div class="tool-info"><h3>AI Product Description</h3><p>Write descriptions that increase ecommerce sales.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-email-writer" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-envelope"></i></div><div class="tool-info"><h3>AI Email Writer</h3><p>Draft professional business emails in seconds.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-linkedin-post" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-brands fa-linkedin-in"></i></div><div class="tool-info"><h3>AI LinkedIn Post Gen</h3><p>Write professional and viral LinkedIn posts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-tweet-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-brands fa-x-twitter"></i></div><div class="tool-info"><h3>AI Tweet Generator</h3><p>Create engaging X (Twitter) threads and tweets.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-grammar-fixer" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-spell-check"></i></div><div class="tool-info"><h3>AI Grammar Fixer</h3><p>Correct English grammar and spelling mistakes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-shorts-hook" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-magnet"></i></div><div class="tool-info"><h3>AI Shorts Hook Gen</h3><p>Generate 3-second hooks that retain viewers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-thumbnail-text" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-image"></i></div><div class="tool-info"><h3>AI Thumbnail Text Gen</h3><p>Clickable short text ideas for YouTube thumbnails.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-viral-video-ideas" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-lightbulb"></i></div><div class="tool-info"><h3>AI Viral Video Ideas</h3><p>Get trending topic ideas for your niche.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-youtube-seo" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-brands fa-youtube"></i></div><div class="tool-info"><h3>AI YouTube SEO Tool</h3><p>Optimize your video to rank on page 1.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-reel-caption" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-video"></i></div><div class="tool-info"><h3>AI Reel Caption Gen</h3><p>Trendy captions for IG Reels with emojis.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-podcast-script" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-microphone-lines"></i></div><div class="tool-info"><h3>AI Podcast Script Writer</h3><p>Outline structure and scripts for podcasts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-channel-name" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-tv"></i></div><div class="tool-info"><h3>AI Channel Name Gen</h3><p>Find unique and brandable YouTube channel names.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-bio-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-address-card"></i></div><div class="tool-info"><h3>AI Bio Generator</h3><p>Write attractive bios for all social platforms.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-prompt-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-terminal"></i></div><div class="tool-info"><h3>AI Prompt Generator</h3><p>Generate perfect prompts for Midjourney/ChatGPT.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-thumbnail-idea" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-regular fa-images"></i></div><div class="tool-info"><h3>AI Thumbnail Idea Gen</h3><p>Get visual concepts for high CTR thumbnails.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-business-name" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-building"></i></div><div class="tool-info"><h3>AI Business Name Gen</h3><p>Generate premium domain and company names.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-startup-idea" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-rocket"></i></div><div class="tool-info"><h3>AI Startup Idea Gen</h3><p>Find profitable SaaS and app startup ideas.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-invoice-generator" class="tool-card"><div class="tool-icon-box bg-neon"><i class="fa-solid fa-file-invoice-dollar"></i></div><div class="tool-info"><h3>AI Invoice Generator</h3><p>Auto-generate professional invoices with AI.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 1. PDF TOOLS -->
+            <div class="category-section" id="pdf">
+                <h2 class="category-title cat-pdf"><i class="fa-solid fa-file-pdf"></i> PDF Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW PDF TOOLS -->
+                    <a href="/pdf-compare" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-code-compare"></i></div><div class="tool-info"><h3>PDF Compare Tool</h3><p>Compare two PDF files and find differences.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-password-remover" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-unlock-keyhole"></i></div><div class="tool-info"><h3>PDF Password Remover</h3><p>Remove passwords and restrictions instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-thumbnail-generator" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-images"></i></div><div class="tool-info"><h3>PDF Thumbnail Generator</h3><p>Extract first page of PDF as an image thumbnail.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    
+                    <a href="/pdf-compressor" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-compress"></i></div><div class="tool-info"><h3>PDF Compressor</h3><p>Compress PDF files without losing quality.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-locker" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-lock"></i></div><div class="tool-info"><h3>PDF Locker</h3><p>Secure your PDF with a strong password.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/merge-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-layer-group"></i></div><div class="tool-info"><h3>Merge PDF</h3><p>Combine multiple PDFs into one document.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/split-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-scissors"></i></div><div class="tool-info"><h3>Split PDF</h3><p>Extract pages or split PDF into multiple files.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/rotate-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-rotate-right"></i></div><div class="tool-info"><h3>Rotate PDF</h3><p>Rotate specific or all pages in a PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/delete-pdf-pages" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-trash-can"></i></div><div class="tool-info"><h3>Delete PDF Pages</h3><p>Remove unnecessary pages from your PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-rearranger" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-arrows-up-down"></i></div><div class="tool-info"><h3>PDF Rearranger</h3><p>Reorder pages inside your PDF file easily.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-to-jpg" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-regular fa-image"></i></div><div class="tool-info"><h3>PDF to JPG</h3><p>Convert PDF pages to high-quality JPG images.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/jpg-to-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-file-image"></i></div><div class="tool-info"><h3>JPG to PDF</h3><p>Convert your JPG images into a single PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/png-to-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-image"></i></div><div class="tool-info"><h3>PNG to PDF</h3><p>Convert PNG images securely into a PDF file.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/word-to-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-file-word"></i></div><div class="tool-info"><h3>Word to PDF</h3><p>Convert Word documents to PDF format.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-to-word" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-file-lines"></i></div><div class="tool-info"><h3>PDF to Word</h3><p>Convert PDF files to editable Word documents.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/excel-to-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-file-excel"></i></div><div class="tool-info"><h3>Excel to PDF</h3><p>Turn Excel spreadsheets into PDF files.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-watermark" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-droplet"></i></div><div class="tool-info"><h3>PDF Watermark Tool</h3><p>Add text or image watermarks to your PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-resize" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-expand"></i></div><div class="tool-info"><h3>PDF Resize Tool</h3><p>Change page size (A4, Letter) of your PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-flatten" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-layer-group"></i></div><div class="tool-info"><h3>PDF Flatten Tool</h3><p>Flatten forms and annotations in a PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/scan-to-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-print"></i></div><div class="tool-info"><h3>Scan to PDF</h3><p>Scan documents using camera to PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ocr-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-magnifying-glass"></i></div><div class="tool-info"><h3>OCR PDF Tool</h3><p>Make scanned PDFs searchable via OCR.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/id-card-pdf" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-regular fa-id-card"></i></div><div class="tool-info"><h3>One Page ID PDF</h3><p>Merge front/back of ID into a single PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-layout" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-table-cells-large"></i></div><div class="tool-info"><h3>PDF Page Layout</h3><p>Print multiple pages on a single PDF sheet.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/multi-pdf-combiner" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-folder-tree"></i></div><div class="tool-info"><h3>Multi PDF Combiner</h3><p>Batch combine multiple folders of PDFs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/notes-optimizer" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-book-open"></i></div><div class="tool-info"><h3>PDF Notes Optimizer</h3><p>Optimize handwritten notes PDFs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-sign" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-signature"></i></div><div class="tool-info"><h3>PDF Sign Tool</h3><p>Draw and add e-signatures to your PDF.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-page-number" class="tool-card"><div class="tool-icon-box bg-red"><i class="fa-solid fa-list-ol"></i></div><div class="tool-info"><h3>PDF Page Number</h3><p>Add page numbers easily to your PDF files.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 2. STUDENT TOOLS -->
+            <div class="category-section" id="student">
+                <h2 class="category-title cat-stu"><i class="fa-solid fa-graduation-cap"></i> Student Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW STUDENT TOOLS -->
+                    <a href="/question-paper-generator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-file-circle-question"></i></div><div class="tool-info"><h3>Question Paper Generator</h3><p>Design and format school question papers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/report-card-generator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-ranking-star"></i></div><div class="tool-info"><h3>Report Card Generator</h3><p>Generate professional student report cards.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    
+                    <a href="/assignment-maker" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-file-pdf"></i></div><div class="tool-info"><h3>Assignment PDF Maker</h3><p>Turn handwritten assignments into clean PDFs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/handwriting-scanner" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-pen-nib"></i></div><div class="tool-info"><h3>Handwriting Scanner</h3><p>Scan and enhance handwritten notes clearly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/notes-organizer" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-folder-open"></i></div><div class="tool-info"><h3>Notes Organizer</h3><p>Organize chapter-wise study notes properly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/marksheet-combiner" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-layer-group"></i></div><div class="tool-info"><h3>Marksheet Combiner</h3><p>Merge all semester marksheets into one file.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/resume-builder" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-briefcase"></i></div><div class="tool-info"><h3>Resume Builder</h3><p>Create professional CVs for freshers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/timetable-generator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-calendar-days"></i></div><div class="tool-info"><h3>Timetable Generator</h3><p>Generate clean school/college class routines.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/study-planner" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-list-check"></i></div><div class="tool-info"><h3>Study Planner</h3><p>Track daily syllabus and study goals.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/mcq-sheet-generator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-regular fa-circle-check"></i></div><div class="tool-info"><h3>MCQ Sheet Generator</h3><p>Create blank bubble OMR/MCQ test sheets.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-highlighter" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-highlighter"></i></div><div class="tool-info"><h3>PDF Highlighter</h3><p>Highlight important text in study material.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/exam-countdown" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-hourglass-half"></i></div><div class="tool-info"><h3>Exam Countdown Tool</h3><p>Set widgets to track days left for exams.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/attendance-calculator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-clipboard-user"></i></div><div class="tool-info"><h3>Attendance Calculator</h3><p>Calculate how many bunks you can afford.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/percentage-calculator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-percent"></i></div><div class="tool-info"><h3>Percentage Calculator</h3><p>Quickly calculate exam marks percentage.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/cgpa-calculator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-calculator"></i></div><div class="tool-info"><h3>CGPA Calculator</h3><p>Convert GPA/CGPA to overall percentage.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/essay-counter" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-file-word"></i></div><div class="tool-info"><h3>Essay Word Counter</h3><p>Check word count for essays and thesis.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/citation-generator" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-quote-right"></i></div><div class="tool-info"><h3>Citation Generator</h3><p>Generate APA, MLA format bibliographies.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/homework-planner" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-book-open"></i></div><div class="tool-info"><h3>Homework Planner</h3><p>Organize due dates and school assignments.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/project-cover" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-image-portrait"></i></div><div class="tool-info"><h3>Project Cover Generator</h3><p>Design stunning front pages for projects.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/study-timer" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-stopwatch"></i></div><div class="tool-info"><h3>Study Timer</h3><p>Pomodoro timer to boost focus while studying.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/exam-routine" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-table-list"></i></div><div class="tool-info"><h3>Exam Routine Maker</h3><p>Build visual date-sheets for your exams.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/notes-formatter" class="tool-card"><div class="tool-icon-box bg-pink"><i class="fa-solid fa-file-pen"></i></div><div class="tool-info"><h3>Notes PDF Formatter</h3><p>Align and format textbook PDF notes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 3. PRINT & CYBER CAFE TOOLS -->
+            <div class="category-section" id="print">
+                <h2 class="category-title cat-print"><i class="fa-solid fa-print"></i> Print & Cyber Cafe Tools</h2>
+                <div class="tool-grid-advanced">
+                    <a href="/passport-photo-maker" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-camera"></i></div><div class="tool-info"><h3>Passport Photo Maker</h3><p>Create auto-sized passport photos instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/a4-photo-layout" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-regular fa-file"></i></div><div class="tool-info"><h3>A4 Photo Layout Gen</h3><p>Arrange multiple photos on A4 sheet for print.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/photo-sheet-creator" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-images"></i></div><div class="tool-info"><h3>Photo Sheet Creator</h3><p>Create custom photo grid sheets for printing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/id-card-print" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-id-card-clip"></i></div><div class="tool-info"><h3>ID Card Print Tool</h3><p>Perfect layout generator for PVC ID Cards.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/aadhaar-layout" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-regular fa-address-card"></i></div><div class="tool-info"><h3>Aadhaar Layout Tool</h3><p>Align Aadhaar front/back for perfect xerox.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pan-card-layout" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-address-card"></i></div><div class="tool-info"><h3>PAN Card Layout Tool</h3><p>Align PAN card images for A4 page printing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/signature-crop" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-pen-nib"></i></div><div class="tool-info"><h3>Signature Crop Tool</h3><p>Crop and clean signatures for official forms.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/stamp-maker" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-stamp"></i></div><div class="tool-info"><h3>Stamp Maker</h3><p>Design digital rubber stamps online.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/seal-png-maker" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-certificate"></i></div><div class="tool-info"><h3>Seal PNG Maker</h3><p>Generate transparent official seal PNGs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/print-margin" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-compress"></i></div><div class="tool-info"><h3>Print Margin Adjuster</h3><p>Fix page margins to prevent print cut-offs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/a4-poster-splitter" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-table-cells-large"></i></div><div class="tool-info"><h3>A4 Poster Splitter</h3><p>Split a large image into A4 sizes for posters.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/doc-scanner-cleaner" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="tool-info"><h3>Document Scanner Cleaner</h3><p>Remove dark backgrounds from mobile scans.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/print-preview" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-eye"></i></div><div class="tool-info"><h3>Photo Print Preview Tool</h3><p>Preview actual print size before printing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/form-optimizer" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-file-contract"></i></div><div class="tool-info"><h3>Form Print Optimizer</h3><p>Enhance application forms for clear printing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/webcam-passport" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-video"></i></div><div class="tool-info"><h3>Webcam Passport Capture</h3><p>Click passport photos using your webcam.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/certificate-print" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-award"></i></div><div class="tool-info"><h3>Certificate Print Tool</h3><p>Set custom margins for certificate printing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/passport-converter" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-minimize"></i></div><div class="tool-info"><h3>Passport Size Converter</h3><p>Convert any image to 3.5x4.5cm dimension.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/id-resize" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-regular fa-id-badge"></i></div><div class="tool-info"><h3>ID Resize Tool</h3><p>Resize images to standard ID card sizes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/auto-crop" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-crop"></i></div><div class="tool-info"><h3>Auto Crop Tool</h3><p>Automatically detect and crop document edges.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/dpi-fixer" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-gear"></i></div><div class="tool-info"><h3>Print DPI Fixer</h3><p>Change image resolution to 300 DPI for print.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/resume-print" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-user-tie"></i></div><div class="tool-info"><h3>Resume Print Formatter</h3><p>Format CVs perfectly for A4 printouts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/doc-bg-cleaner" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-eraser"></i></div><div class="tool-info"><h3>Document BG Cleaner</h3><p>Remove shadow/gray background from pages.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/smart-xerox" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-copy"></i></div><div class="tool-info"><h3>Smart Xerox Layout</h3><p>Arrange books or ID pages for easy Xerox.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/color-to-bw" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-circle-half-stroke"></i></div><div class="tool-info"><h3>Color to B&W Tool</h3><p>Convert color documents to pure B&W.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/multi-photo-print" class="tool-card"><div class="tool-icon-box bg-orange"><i class="fa-solid fa-clone"></i></div><div class="tool-info"><h3>Multi Photo Print Tool</h3><p>Generate mixed sizes of photos on one page.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 4. IMAGE TOOLS -->
+            <div class="category-section" id="image">
+                <h2 class="category-title cat-img"><i class="fa-regular fa-image"></i> Image Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW IMAGE TOOLS -->
+                    <a href="/svg-converter" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-vector-square"></i></div><div class="tool-info"><h3>SVG Converter</h3><p>Convert images to scalable vector graphics.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ico-maker" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-icons"></i></div><div class="tool-info"><h3>ICO Maker</h3><p>Create Windows .ico files from any image.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/favicon-generator" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-bookmark"></i></div><div class="tool-info"><h3>Favicon Generator</h3><p>Generate perfect favicons for websites.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+
+                    <a href="/image-compressor" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-compress"></i></div><div class="tool-info"><h3>Image Compressor</h3><p>Reduce image file size in KB without quality loss.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-resizer" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-expand"></i></div><div class="tool-info"><h3>Image Resizer</h3><p>Resize images by dimension or percentage.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-cropper" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-crop"></i></div><div class="tool-info"><h3>Image Cropper</h3><p>Crop images to specific ratios easily.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/background-remover" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-user-xmark"></i></div><div class="tool-info"><h3>Background Remover</h3><p>AI tool to remove image backgrounds.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/blur-background" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-droplet"></i></div><div class="tool-info"><h3>Blur Background Tool</h3><p>Add a professional blur effect to backgrounds.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-sharpen" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-sun"></i></div><div class="tool-info"><h3>Image Sharpen Tool</h3><p>Fix blurry images and enhance details.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/png-to-jpg" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-right-left"></i></div><div class="tool-info"><h3>PNG to JPG Converter</h3><p>Convert transparent PNGs to solid JPGs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/jpg-to-png" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-right-left"></i></div><div class="tool-info"><h3>JPG to PNG Converter</h3><p>Convert JPG images into PNG format.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/webp-converter" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-file-image"></i></div><div class="tool-info"><h3>WebP Converter</h3><p>Convert images to next-gen WebP format.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-watermark" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-copyright"></i></div><div class="tool-info"><h3>Image Watermark Tool</h3><p>Protect images with text or logo watermarks.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/meme-generator" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-regular fa-face-laugh-squint"></i></div><div class="tool-info"><h3>Meme Generator</h3><p>Add text to images and create viral memes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/thumbnail-resize" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-brands fa-youtube"></i></div><div class="tool-info"><h3>Thumbnail Resize Tool</h3><p>Resize images perfectly for YouTube thumbnails.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/social-media-resize" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-share-nodes"></i></div><div class="tool-info"><h3>Social Media Resize Tool</h3><p>Auto-crop for Insta, FB, Twitter dimensions.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/screenshot-beautifier" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-desktop"></i></div><div class="tool-info"><h3>Screenshot Beautifier</h3><p>Add browser mockups and backgrounds to snaps.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-to-text" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-file-word"></i></div><div class="tool-info"><h3>Image to Text Tool</h3><p>Extract text from images using online OCR.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/bw-converter" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-palette"></i></div><div class="tool-info"><h3>Black & White Converter</h3><p>Turn color photographs into black and white.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ai-image-enhancer" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="tool-info"><h3>AI Image Enhancer</h3><p>Upscale and improve image resolution with AI.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/rotate-image" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-rotate"></i></div><div class="tool-info"><h3>Rotate Image Tool</h3><p>Rotate pictures 90°, 180° or custom angles.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/flip-image" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-arrows-left-right"></i></div><div class="tool-info"><h3>Flip Image Tool</h3><p>Mirror images horizontally or vertically.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/batch-image-rename" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-tags"></i></div><div class="tool-info"><h3>Batch Image Rename</h3><p>Rename multiple photos in one click.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/photo-blur" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-eye-slash"></i></div><div class="tool-info"><h3>Photo Blur Tool</h3><p>Censor specific parts of an image by blurring.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/photo-filter" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-filter"></i></div><div class="tool-info"><h3>Photo Filter Tool</h3><p>Apply vintage, sepia and color filters.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/photo-frame" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-regular fa-square"></i></div><div class="tool-info"><h3>Photo Frame Generator</h3><p>Add beautiful borders and frames to photos.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/photo-color-fix" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-fill-drip"></i></div><div class="tool-info"><h3>Photo Color Fix Tool</h3><p>Adjust brightness, contrast, and saturation.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/transparent-png-maker" class="tool-card"><div class="tool-icon-box bg-green"><i class="fa-solid fa-chess-board"></i></div><div class="tool-info"><h3>Transparent PNG Maker</h3><p>Remove white background and make it transparent.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 5. TEXT TOOLS -->
+            <div class="category-section" id="text">
+                <h2 class="category-title cat-txt"><i class="fa-solid fa-font"></i> Text Tools</h2>
+                <div class="tool-grid-advanced">
+                    <a href="/blank-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-regular fa-square"></i></div><div class="tool-info"><h3>Blank Text Generator</h3><p>Copy invisible empty text for messaging apps.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/fancy-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-star"></i></div><div class="tool-info"><h3>Fancy Text Generator</h3><p>Generate cool, stylish fonts for social media.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/emoji-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-regular fa-face-smile"></i></div><div class="tool-info"><h3>Emoji Text Generator</h3><p>Convert words into emoji letters.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/glitch-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-bolt"></i></div><div class="tool-info"><h3>Glitch Text Generator</h3><p>Create creepy, glitchy Zalgo text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/morse-code" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-grip-lines"></i></div><div class="tool-info"><h3>Morse Code Converter</h3><p>Translate text to morse code and vice versa.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/hidden-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-eye"></i></div><div class="tool-info"><h3>Hidden Text Revealer</h3><p>Find hidden characters in text strings.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/invisible-char" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-ghost"></i></div><div class="tool-info"><h3>Invisible Char Detector</h3><p>Spot zero-width and invisible characters.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/case-converter" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-text-height"></i></div><div class="tool-info"><h3>Case Converter</h3><p>Convert text to UPPERCASE, lowercase, etc.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/character-counter" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-calculator"></i></div><div class="tool-info"><h3>Character Counter</h3><p>Count words, characters, and paragraphs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/duplicate-line-remover" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-list-ul"></i></div><div class="tool-info"><h3>Duplicate Line Remover</h3><p>Find and delete repeated lines of text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/gamer-name" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-gamepad"></i></div><div class="tool-info"><h3>Gamer Name Generator</h3><p>Create cool nicknames for PUBG, FreeFire.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/unicode-font" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-language"></i></div><div class="tool-info"><h3>Unicode Font Generator</h3><p>Generate special unicode text art.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/instagram-bio" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-brands fa-instagram"></i></div><div class="tool-info"><h3>Instagram Bio Generator</h3><p>Format cool and attractive bios for Insta.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/whatsapp-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-brands fa-whatsapp"></i></div><div class="tool-info"><h3>WhatsApp Text Tools</h3><p>Generate bold, italic, and strikethrough text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-encrypt" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-lock"></i></div><div class="tool-info"><h3>Text Encrypt Tool</h3><p>Secure text with AES password encryption.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-decrypt" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-unlock"></i></div><div class="tool-info"><h3>Text Decrypt Tool</h3><p>Decrypt password-protected text messages.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-repeater" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-copy"></i></div><div class="tool-info"><h3>Text Repeater</h3><p>Repeat a word or phrase 10,000+ times.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/random-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-shuffle"></i></div><div class="tool-info"><h3>Random Text Generator</h3><p>Generate Lorem Ipsum placeholder text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/stylish-name" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-signature"></i></div><div class="tool-info"><h3>Stylish Name Maker</h3><p>Design beautiful names with symbols.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-to-emoji" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-face-grin-stars"></i></div><div class="tool-info"><h3>Text to Emoji Converter</h3><p>Replace keywords with relevant emojis.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/reverse-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-arrow-right-arrow-left"></i></div><div class="tool-info"><h3>Reverse Text Tool</h3><p>Read text backwards instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/ascii-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-barcode"></i></div><div class="tool-info"><h3>ASCII Text Tool</h3><p>Convert plain text into ASCII art banners.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/zalgo-text" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-tornado"></i></div><div class="tool-info"><h3>Zalgo Text Generator</h3><p>Create cursed demonic looking text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/invisible-space" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-square-full"></i></div><div class="tool-info"><h3>Invisible Space Tool</h3><p>Copy blank spaces that don't trigger errors.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-cleaner" class="tool-card"><div class="tool-icon-box bg-purple"><i class="fa-solid fa-broom"></i></div><div class="tool-info"><h3>Text Cleaner Tool</h3><p>Remove extra spaces and format messy text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 6. FINANCE & BUSINESS TOOLS -->
+            <div class="category-section" id="finance">
+                <h2 class="category-title cat-fin"><i class="fa-solid fa-coins"></i> Finance & Business</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW BUSINESS TOOLS -->
+                    <a href="/invoice-maker" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-file-invoice"></i></div><div class="tool-info"><h3>Invoice Maker</h3><p>Generate digital bills and business invoices.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/quotation-maker" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-file-contract"></i></div><div class="tool-info"><h3>Quotation Maker</h3><p>Create price quotes and estimates for clients.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/receipt-generator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-receipt"></i></div><div class="tool-info"><h3>Receipt Generator</h3><p>Create payment receipts instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+
+                    <a href="/emi-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-calculator"></i></div><div class="tool-info"><h3>EMI Calculator</h3><p>Calculate monthly EMI for home or car loans.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/gst-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-file-invoice-dollar"></i></div><div class="tool-info"><h3>GST Calculator</h3><p>Add or remove GST percentage easily.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/sip-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-chart-line"></i></div><div class="tool-info"><h3>SIP Calculator</h3><p>Calculate Mutual Fund SIP returns.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/fd-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-piggy-bank"></i></div><div class="tool-info"><h3>FD Calculator</h3><p>Check maturity amount of Fixed Deposits.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/loan-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-building-columns"></i></div><div class="tool-info"><h3>Loan Calculator</h3><p>Compare loan interest rates and tenure.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/interest-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-percent"></i></div><div class="tool-info"><h3>Interest Calculator</h3><p>Simple and compound interest calculator.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/discount-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-tag"></i></div><div class="tool-info"><h3>Discount Calculator</h3><p>Find out the final price after sale discounts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/profit-margin" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-arrow-trend-up"></i></div><div class="tool-info"><h3>Profit Margin Calculator</h3><p>Calculate gross and net profit margins.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/tax-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-scale-balanced"></i></div><div class="tool-info"><h3>Tax Calculator</h3><p>Estimate your annual income tax bracket.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/salary-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-money-check-dollar"></i></div><div class="tool-info"><h3>Salary Calculator</h3><p>Calculate in-hand salary after deductions.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/commission-calculator" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-hand-holding-dollar"></i></div><div class="tool-info"><h3>Commission Calculator</h3><p>Calculate sales commission payouts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/currency-converter" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-money-bill-transfer"></i></div><div class="tool-info"><h3>Currency Converter</h3><p>Live exchange rates for global currencies.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/budget-planner" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-wallet"></i></div><div class="tool-info"><h3>Budget Planner</h3><p>Manage monthly expenses and savings.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/investment-return" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-chart-pie"></i></div><div class="tool-info"><h3>Investment Return Tool</h3><p>Check ROI on long-term investments.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/expense-splitter" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-users"></i></div><div class="tool-info"><h3>Expense Splitter</h3><p>Split trip or dinner bills with friends.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/business-profit" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-briefcase"></i></div><div class="tool-info"><h3>Business Profit Tool</h3><p>Analyze revenue, costs, and net profits.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/gst-bill" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-file-invoice"></i></div><div class="tool-info"><h3>GST Bill Generator</h3><p>Create simple GST compliant invoices.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/income-tax" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-landmark"></i></div><div class="tool-info"><h3>Income Tax Tool</h3><p>Check total taxable income easily.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/crypto-profit" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-brands fa-bitcoin"></i></div><div class="tool-info"><h3>Crypto Profit Calculator</h3><p>Calculate profits on cryptocurrency trades.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/stock-average" class="tool-card"><div class="tool-icon-box bg-blue"><i class="fa-solid fa-layer-group"></i></div><div class="tool-info"><h3>Stock Average Calculator</h3><p>Find average buy price for stock averaging.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 7. DEVELOPER TOOLS -->
+            <div class="category-section" id="dev">
+                <h2 class="category-title cat-web"><i class="fa-solid fa-code"></i> Developer Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW DEVELOPER TOOLS -->
+                    <a href="/jwt-decoder" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-code-pull-request"></i></div><div class="tool-info"><h3>JWT Decoder</h3><p>Decode JSON Web Tokens instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/sql-formatter" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-database"></i></div><div class="tool-info"><h3>SQL Formatter</h3><p>Format and beautify SQL queries.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/markdown-editor" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-brands fa-markdown"></i></div><div class="tool-info"><h3>Markdown Editor</h3><p>Live preview editor for markdown files.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+
+                    <a href="/html-minifier" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-brands fa-html5"></i></div><div class="tool-info"><h3>HTML Minifier</h3><p>Compress HTML code to reduce file size.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/css-minifier" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-brands fa-css3-alt"></i></div><div class="tool-info"><h3>CSS Minifier</h3><p>Remove spaces and compress CSS codes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/js-minifier" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-brands fa-js"></i></div><div class="tool-info"><h3>JavaScript Minifier</h3><p>Minify JS for faster website loading.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/js-obfuscator" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-user-secret"></i></div><div class="tool-info"><h3>JavaScript Obfuscator</h3><p>Protect JS code making it hard to read.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/source-protector" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-shield-halved"></i></div><div class="tool-info"><h3>Source Code Protector</h3><p>Encrypt HTML source code of your page.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/json-formatter" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-code"></i></div><div class="tool-info"><h3>JSON Formatter</h3><p>Format and validate JSON string data.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/html-viewer" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-laptop-code"></i></div><div class="tool-info"><h3>HTML Viewer</h3><p>Live preview of your HTML code.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/css-beautifier" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-paintbrush"></i></div><div class="tool-info"><h3>CSS Beautifier</h3><p>Format minified CSS to readable style.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/js-beautifier" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-align-left"></i></div><div class="tool-info"><h3>JS Beautifier</h3><p>Unpack and format minified JS scripts.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/base64-encoder" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-gears"></i></div><div class="tool-info"><h3>Base64 Encoder</h3><p>Encode or Decode text/images to Base64.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/url-encoder" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-link"></i></div><div class="tool-info"><h3>URL Encoder</h3><p>Encode URL strings to safe web formats.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/qr-generator" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-qrcode"></i></div><div class="tool-info"><h3>QR Code Generator</h3><p>Create QR codes for links, text or Vcards.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/password-generator" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-key"></i></div><div class="tool-info"><h3>Password Generator</h3><p>Generate highly secure random passwords.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/meta-tag" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-hashtag"></i></div><div class="tool-info"><h3>Meta Tag Generator</h3><p>Create SEO-friendly meta tags for websites.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/open-graph" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-share-nodes"></i></div><div class="tool-info"><h3>Open Graph Generator</h3><p>Generate OG tags for Facebook & Twitter.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/robots-txt" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-robot"></i></div><div class="tool-info"><h3>Robots.txt Generator</h3><p>Create robots.txt for search engine crawlers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/sitemap-generator" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-sitemap"></i></div><div class="tool-info"><h3>Sitemap Generator</h3><p>Create XML sitemaps for your domain.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/color-picker" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-eye-dropper"></i></div><div class="tool-info"><h3>Color Picker</h3><p>Pick HEX, RGB, HSL colors visually.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/gradient-generator" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-palette"></i></div><div class="tool-info"><h3>Gradient Generator</h3><p>Create CSS linear & radial gradients.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/regex-tester" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-vial"></i></div><div class="tool-info"><h3>Regex Tester</h3><p>Test regular expressions interactively.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/code-preview" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-code-compare"></i></div><div class="tool-info"><h3>Code Preview Tool</h3><p>Test HTML/CSS/JS snippets live.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/website-packager" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-box-open"></i></div><div class="tool-info"><h3>Website Packager Tool</h3><p>Minify & bundle all files in one go.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/anti-inspect" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-ban"></i></div><div class="tool-info"><h3>Anti Inspect Script</h3><p>Block Right-Click & F12 on your site.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/api-tester" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-network-wired"></i></div><div class="tool-info"><h3>API Tester</h3><p>Send GET, POST requests to test APIs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/webhook-tester" class="tool-card"><div class="tool-icon-box bg-indigo"><i class="fa-solid fa-satellite-dish"></i></div><div class="tool-info"><h3>Webhook Tester</h3><p>Inspect incoming HTTP payloads instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 8. DAILY UTILITY TOOLS -->
+            <div class="category-section" id="utility">
+                <h2 class="category-title cat-daily"><i class="fa-solid fa-clock"></i> Daily Utility Tools</h2>
+                <div class="tool-grid-advanced">
+                    <a href="/age-calculator" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-cake-candles"></i></div><div class="tool-info"><h3>Age Calculator</h3><p>Find out exact age in years, months, days.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/unit-converter" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-weight-scale"></i></div><div class="tool-info"><h3>Unit Converter</h3><p>Convert length, weight, volume, temp.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/bmi-calculator" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-heart-pulse"></i></div><div class="tool-info"><h3>BMI Calculator</h3><p>Check Body Mass Index for fitness.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/timer" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-stopwatch-20"></i></div><div class="tool-info"><h3>Timer</h3><p>Online countdown timer with alarm.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/stopwatch" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-stopwatch"></i></div><div class="tool-info"><h3>Stopwatch</h3><p>Precise stopwatch with lap features.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/calendar-tool" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-regular fa-calendar-days"></i></div><div class="tool-info"><h3>Calendar Tool</h3><p>Interactive calendar with week numbers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/world-clock" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-globe"></i></div><div class="tool-info"><h3>World Clock</h3><p>Check current time in different timezones.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/speech-to-text" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-microphone"></i></div><div class="tool-info"><h3>Speech to Text</h3><p>Dictate and convert voice to written text.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/text-to-speech" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-volume-high"></i></div><div class="tool-info"><h3>Text to Speech</h3><p>Read out written text with natural voices.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/random-name-picker" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-shuffle"></i></div><div class="tool-info"><h3>Random Name Picker</h3><p>Spin the wheel for random selections.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/coin-flip" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-brands fa-bitcoin"></i></div><div class="tool-info"><h3>Coin Flip Tool</h3><p>Digital coin toss heads or tails.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/dice-roller" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-dice"></i></div><div class="tool-info"><h3>Dice Roller</h3><p>Roll virtual dice for board games.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/barcode-generator" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-barcode"></i></div><div class="tool-info"><h3>Barcode Generator</h3><p>Create UPC, EAN, Code128 barcodes.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/wifi-qr-generator" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-wifi"></i></div><div class="tool-info"><h3>WiFi QR Generator</h3><p>Create QR codes for easy WiFi connect.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/file-rename" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-file-pen"></i></div><div class="tool-info"><h3>File Rename Tool</h3><p>Quickly format filenames uniformly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/zip-extractor" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-file-zipper"></i></div><div class="tool-info"><h3>ZIP Extractor</h3><p>Extract .zip files directly in browser.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/file-size-checker" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-weight-hanging"></i></div><div class="tool-info"><h3>File Size Checker</h3><p>Check exact size bytes of any file.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/duplicate-file-finder" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-copy"></i></div><div class="tool-info"><h3>Duplicate File Finder</h3><p>Compare files to find exact matches.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/alarm-tool" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-bell"></i></div><div class="tool-info"><h3>Alarm Tool</h3><p>Set browser based alarm notifications.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/clipboard-cleaner" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-clipboard-check"></i></div><div class="tool-info"><h3>Clipboard Cleaner</h3><p>Clear sensitive copied data safely.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/quick-notes" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-note-sticky"></i></div><div class="tool-info"><h3>Quick Notes Tool</h3><p>Temporary browser notepad.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/date-difference" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-calendar-minus"></i></div><div class="tool-info"><h3>Date Difference Tool</h3><p>Calculate days between two dates.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/simple-calculator" class="tool-card"><div class="tool-icon-box bg-teal"><i class="fa-solid fa-calculator"></i></div><div class="tool-info"><h3>Simple Calculator</h3><p>Quick mathematical calculator.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+            <!-- 9. PRIVACY & SECURITY TOOLS -->
+            <div class="category-section" id="security" style="margin-bottom: 0;">
+                <h2 class="category-title cat-sec"><i class="fa-solid fa-shield-halved"></i> Privacy & Security Tools</h2>
+                <div class="tool-grid-advanced">
+                    <!-- NEW SECURITY TOOLS -->
+                    <a href="/hash-generator" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-hashtag"></i></div><div class="tool-info"><h3>Hash Generator</h3><p>Generate secure hashes for any string.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/sha256-generator" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-shield-cat"></i></div><div class="tool-info"><h3>SHA256 Generator</h3><p>Encrypt text into unbreakable SHA256 format.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/md5-generator" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-fingerprint"></i></div><div class="tool-info"><h3>MD5 Generator</h3><p>Convert texts to standard MD5 hashes instantly.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+
+                    <a href="/document-blur" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-eraser"></i></div><div class="tool-info"><h3>Document Blur Tool</h3><p>Blur sensitive details in documents.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-redaction" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-marker"></i></div><div class="tool-info"><h3>PDF Redaction Tool</h3><p>Blackout private text in PDFs permanently.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/sensitive-info-hider" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-user-secret"></i></div><div class="tool-info"><h3>Sensitive Info Hider</h3><p>Mask account numbers and PAN details.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/signature-hide" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-eraser"></i></div><div class="tool-info"><h3>Signature Hide Tool</h3><p>Remove signatures from leaked documents.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-privacy-mask" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-mask"></i></div><div class="tool-info"><h3>Image Privacy Mask</h3><p>Pixelate faces and number plates in photos.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/secure-pdf-masker" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-shield"></i></div><div class="tool-info"><h3>Secure PDF Masker</h3><p>Mask data without ruining PDF formatting.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/privacy-document-tool" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-file-contract"></i></div><div class="tool-info"><h3>Privacy Document Tool</h3><p>Prepare documents for safe online sharing.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/smart-redaction" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="tool-info"><h3>Smart Redaction Tool</h3><p>Auto-detect and hide emails/phone numbers.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/pdf-blur" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-droplet-slash"></i></div><div class="tool-info"><h3>PDF Blur Tool</h3><p>Make specific areas unreadable in PDFs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/id-protection" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-id-badge"></i></div><div class="tool-info"><h3>ID Protection Tool</h3><p>Add "Xerox Only" watermark on Aadhaar/IDs.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/file-locker" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-lock"></i></div><div class="tool-info"><h3>File Locker Tool</h3><p>Password protect any file before sending.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/folder-password" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-folder"></i></div><div class="tool-info"><h3>Folder Password Tool</h3><p>Create password protected ZIP archives.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/secure-text-encryptor" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-file-code"></i></div><div class="tool-info"><h3>Secure Text Encryptor</h3><p>Military-grade AES text encryption.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/metadata-remover" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-circle-minus"></i></div><div class="tool-info"><h3>Metadata Remover</h3><p>Strip hidden metadata from documents.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                    <a href="/image-exif-cleaner" class="tool-card"><div class="tool-icon-box bg-gray-dark"><i class="fa-solid fa-camera-rotate"></i></div><div class="tool-info"><h3>Image EXIF Cleaner</h3><p>Remove GPS location from camera photos.</p></div><i class="fa-solid fa-chevron-right tool-arrow"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Upcoming Subscription Section -->
+    <section class="subscription-section">
+        <div class="container">
+            <div class="subs-header">
+                <h2>Upcoming Premium Access</h2>
+                <p>Unlock the true power of AI, unlimited access, and priority processing. Join the waiting list today!</p>
+                <div class="subs-offer-banner">
+                    🚀 Show interest now & get 20% OFF + up to 500 AI credits FREE on launch!
+                </div>
+            </div>
+
+            <!-- Beautifully wrapped grid (3 top, 2 bottom) -->
+            <div class="pricing-grid">
+                
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Free Plan</div>
+                    <div class="plan-price">₹0<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> 200+ Utility Tools Free</li>
+                        <li><i class="fa-solid fa-check"></i> PDF & Print Tools</li>
+                        <li><i class="fa-solid fa-check"></i> Image & Text Tools</li>
+                        <li><i class="fa-solid fa-check"></i> Student & Dev Tools</li>
+                        <li><i class="fa-solid fa-gift" style="color:var(--primary);"></i> 2 Free AI Credits Daily</li>
+                    </ul>
+                    <button class="notify-btn" onclick="alert('Thank you for showing interest!')">Notify Me</button>
+                </div>
+
+                <!-- Starter AI -->
+                <div class="pricing-card">
+                    <div class="plan-name">Starter AI</div>
+                    <div class="plan-price">₹99<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> Everything in Free</li>
+                        <li><i class="fa-solid fa-check"></i> 100 AI Credits / Month</li>
+                        <li><i class="fa-solid fa-check"></i> Faster AI Response</li>
+                        <li><i class="fa-solid fa-check"></i> No AI Queue Time</li>
+                    </ul>
+                    <button class="notify-btn" onclick="alert('Thank you for showing interest!')">Notify Me</button>
+                </div>
+
+                <!-- Pro AI (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-name">Pro AI</div>
+                    <div class="plan-price">₹299<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> Everything in Starter</li>
+                        <li><i class="fa-solid fa-check"></i> 500 AI Credits / Month</li>
+                        <li><i class="fa-solid fa-check"></i> Premium AI Models</li>
+                        <li><i class="fa-solid fa-check"></i> Priority Processing</li>
+                    </ul>
+                    <button class="notify-btn" onclick="alert('Thank you for showing interest!')">Notify Me</button>
+                </div>
+
+                <!-- Creator Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Creator Plan</div>
+                    <div class="plan-price">₹499<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> 1000 AI Credits / Month</li>
+                        <li><i class="fa-solid fa-check"></i> AI Blog Generator</li>
+                        <li><i class="fa-solid fa-check"></i> Premium AI SEO Tools</li>
+                        <li><i class="fa-solid fa-check"></i> Advanced Content Suite</li>
+                    </ul>
+                    <button class="notify-btn" onclick="alert('Thank you for showing interest!')">Notify Me</button>
+                </div>
+
+                <!-- Business Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Business Plan</div>
+                    <div class="plan-price">₹999<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> 3000 AI Credits / Month</li>
+                        <li><i class="fa-solid fa-check"></i> Team Access & Invites</li>
+                        <li><i class="fa-solid fa-check"></i> Full Commercial Usage</li>
+                        <li><i class="fa-solid fa-check"></i> Dedicated Support Setup</li>
+                    </ul>
+                    <button class="notify-btn" onclick="alert('Thank you for showing interest!')">Notify Me</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- OrbitNova Premium Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-top-section">
+                <div class="brand-intro">
+                    <a href="#top" class="logo">🚀 OrbitNova</a>
+                    <p>OrbitNova is a next-generation digital utility platform designed for creators, students, developers, businesses, and cyber cafe workflows.<br><br>Access 240+ powerful online tools instantly — fast, secure, modern, and fully browser-based.<br><br>No installation. No signup. Just smart tools that work.</p>
+                </div>
+
+                <div class="footer-links-grid">
+                    <div class="footer-col">
+                        <h4>🌐 Platform</h4>
+                        <ul>
+                            <li><a href="#about">About OrbitNova</a></li>
+                            <li><a href="/contact">Contact Support</a></li>
+                            <li><a href="/updates">Developer Updates</a></li>
+                            <li><a href="/blog">Blog & Tutorials</a></li>
+                            <li><a href="/features">Feature Requests</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>⚡ Features</h4>
+                        <ul>
+                            <li><a href="#top">240+ Smart Utility Tools</a></li>
+                            <li><a href="#ai">AI-Powered Utilities</a></li>
+                            <li><a href="#top">Fast Browser Processing</a></li>
+                            <li><a href="#top">Mobile Optimized</a></li>
+                            <li><a href="#security">Privacy & Security Focused</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>📂 Top Categories</h4>
+                        <ul>
+                            <li><a href="#ai">AI Super Tools</a></li>
+                            <li><a href="#pdf">PDF & Document Tools</a></li>
+                            <li><a href="#student">Student Utilities</a></li>
+                            <li><a href="#print">Print & Cyber Cafe</a></li>
+                            <li><a href="#image">Image & Media Tools</a></li>
+                            <li><a href="#dev">Developer Kits</a></li>
+                            <li><a href="#finance">Business & Finance</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>🔒 Legal</h4>
+                        <ul>
+                            <li><a href="/privacy">Privacy Policy</a></li>
+                            <li><a href="/terms">Terms of Service</a></li>
+                            <li><a href="/disclaimer">Disclaimer</a></li>
+                            <li><a href="/dmca">DMCA Notice</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>🤖 Future AI Ecosystem</h4>
+                        <ul>
+                            <li><a href="#">AI Integrations</a></li>
+                            <li><a href="#">Smart Automation</a></li>
+                            <li><a href="#">Cloud Utilities</a></li>
+                            <li><a href="#">Developer API Access</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centered Bottom Footer Design -->
+        <div class="footer-bottom-container">
+            <div class="container">
+                <div class="footer-bottom-wrapper">
+                    <div class="fb-copy">© 2026 <strong>OrbitNova</strong></div>
+                    <div class="fb-subtext">Built for the future digital workspace.</div>
+                    <div class="fb-powered">Powered By <span class="corp-name">Sazzidul Corporation</span></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript For Menu, Search & Filter -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars-staggered');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars-staggered');
+            }
+        });
+
+        // Auto Close Menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars-staggered');
+            });
+        });
+
+        // 2. Fast Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const toolCards = document.querySelectorAll('.tool-card');
+        const categorySections = document.querySelectorAll('.category-section');
+        const noResultsMsg = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let totalVisibleCards = 0;
+
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    totalVisibleCards++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            categorySections.forEach(section => {
+                const visibleCardsInSection = section.querySelectorAll('.tool-card[style="display: flex;"], .tool-card:not([style*="display: none"])');
+                if (visibleCardsInSection.length === 0 && searchTerm !== "") {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+
+            if (totalVisibleCards === 0 && searchTerm !== "") {
+                noResultsMsg.style.display = 'block';
+            } else {
+                noResultsMsg.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
