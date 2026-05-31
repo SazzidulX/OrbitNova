@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI Title Generator - OrbitNova</title>
+    <meta name="description" content="Generate highly engaging, viral, and SEO-friendly YouTube and Blog titles instantly with OrbitNova's free AI Title Generator.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === VARIABLES === */
+        :root {
+            --primary: #5850ec; --primary-hover: #4338ca;
+            --bg-main: #f8fafc; --bg-card: #ffffff;
+            --text-dark: #0f172a; --text-gray: #475569; --border-color: #e2e8f0;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        /* === ANTI-COPY === */
+        body { -webkit-user-select: none; user-select: none; font-family: var(--font-main); background: var(--bg-main); color: var(--text-dark); margin: 0; padding: 0; line-height: 1.6; }
+        input, textarea, .result-text { -webkit-user-select: text; user-select: text; }
+        * { box-sizing: border-box; text-decoration: none; outline: none; }
+
+        /* === MINIMAL TOP BAR === */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 850px; margin: 0 auto; }
+        .site-name { font-weight: 900; font-size: 1.3rem; color: var(--text-gray); letter-spacing: -0.5px; cursor: pointer; }
+        .close-btn { background: white; border: 1px solid var(--border-color); color: var(--text-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .close-btn:hover { background: #fee2e2; color: #ef4444; border-color: #fca5a5; transform: rotate(90deg); }
+
+        /* === MAIN TOOL AREA === */
+        .tool-container { max-width: 850px; margin: 10px auto 50px; padding: 0 20px; }
+        
+        /* Category Badge */
+        .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(88,80,236,0.1); color: var(--primary); padding: 6px 14px; border-radius: 30px; font-size: 0.85rem; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(88,80,236,0.2); }
+        .tool-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 8px; color: var(--text-dark); letter-spacing: -0.5px;}
+        .tool-desc { color: var(--text-gray); font-size: 1.05rem; margin-bottom: 25px; font-weight: 500;}
+
+        /* Tool Card */
+        .tool-card { background: var(--bg-card); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 15px 35px rgba(0,0,0,0.03); margin-bottom: 15px; position: relative;}
+        
+        /* Advanced Input Box */
+        .input-wrapper { position: relative; margin-bottom: 20px; }
+        textarea { width: 100%; min-height: 130px; padding: 18px; border-radius: 12px; border: 2px solid transparent; background: #f1f5f9; font-family: var(--font-main); font-size: 1.05rem; resize: vertical; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+        textarea:focus { background: white; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(88, 80, 236, 0.15); transform: translateY(-2px); }
+        textarea::placeholder { color: #94a3b8; font-weight: 500; }
+
+        /* Animated Generate Button */
+        .gen-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #818cf8); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(88, 80, 236, 0.25); position: relative; overflow: hidden;}
+        .gen-btn::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: rgba(255,255,255,0.2); transform: rotate(45deg); transition: 0.5s; opacity: 0; }
+        .gen-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(88, 80, 236, 0.4); }
+        .gen-btn:hover::after { opacity: 1; transform: rotate(45deg) translate(50%, 50%); }
+        .gen-btn:disabled { opacity: 0.8; cursor: wait; transform: scale(0.98); box-shadow: none; background: #6366f1;}
+        .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s infinite linear; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Tool Stats */
+        .tool-stats { display: flex; justify-content: center; align-items: center; gap: 20px; font-size: 0.9rem; font-weight: 600; color: var(--text-gray); flex-wrap: wrap; margin-bottom: 10px;}
+        .tool-stats span { display: flex; align-items: center; gap: 6px; }
+        .tool-stats i { font-size: 1.1rem;}
+
+        /* Tags */
+        .tags-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
+        .tag { background: white; border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; color: var(--text-gray); font-weight: 600; }
+
+        /* AI Skeleton Loading Animation */
+        .skeleton-loader { display: none; margin-top: 25px; padding-top: 25px; border-top: 1px dashed var(--border-color); }
+        .skel-line { height: 15px; background: #e2e8f0; border-radius: 8px; margin-bottom: 12px; position: relative; overflow: hidden;}
+        .skel-line::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation: shimmer 1.5s infinite; }
+        .skel-line:nth-child(1) { width: 40%; height: 20px; margin-bottom: 20px;}
+        .skel-line:nth-child(2) { width: 100%; }
+        .skel-line:nth-child(3) { width: 90%; }
+        .skel-line:nth-child(4) { width: 95%; }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* Result Box */
+        .result-area { display: none; margin-top: 25px; border-top: 1px dashed var(--border-color); padding-top: 25px; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(10px);}
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .res-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .res-header h3 { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;}
+        .res-header h3 i { color: #10b981; }
+        .copy-btn { background: var(--bg-main); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem; display: flex; gap: 6px; align-items: center; transition: 0.3s; color: var(--text-dark);}
+        .copy-btn:hover { background: var(--border-color); transform: scale(1.05);}
+        .result-text { background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); white-space: pre-wrap; font-size: 1.05rem; line-height: 1.8; color: var(--text-dark); font-weight: 600; box-shadow: 0 5px 15px rgba(88,80,236,0.05);}
+
+        /* === RECOMMENDED TOOLS GRID (CATEGORY SPECIFIC) === */
+        .recommended-sec { margin-top: 50px; padding-top: 30px; border-top: 2px dashed var(--border-color); }
+        .recommended-sec h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 20px; text-align: left;}
+        
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+        .rec-card { display: flex; align-items: center; gap: 12px; padding: 15px; background: white; border: 1.5px solid var(--border-color); border-radius: 14px; transition: 0.3s; cursor: pointer; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .rec-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(88, 80, 236, 0.08); }
+        .rec-icon { width: 45px; height: 45px; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.2rem; flex-shrink: 0;}
+        .rec-info h4 { font-size: 0.95rem; margin: 0; color: var(--text-dark); font-weight: 700;}
+        .rec-info p { font-size: 0.8rem; margin: 0; color: var(--text-gray); font-weight: 500;}
+
+        /* Global Promo & Footer */
+        .global-promo { margin-top: 50px; background: rgba(88,80,236,0.05); border: 1px solid rgba(88,80,236,0.2); padding: 20px; border-radius: 16px; text-align: center; color: var(--text-dark); font-weight: 600; font-size: 1rem;}
+        .global-promo a { color: var(--primary); text-decoration: underline; font-weight: 800;}
+        footer { text-align: center; padding: 30px 20px; margin-top: 10px; font-size: 0.9rem; color: var(--text-gray); font-weight: 600; }
+
+        .bg-neon { background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
+        .bg-blue { background: #3b82f6; }
+
+        @media(max-width: 600px){
+            .tool-container { padding: 0 15px; margin-top: 0;}
+            .tool-title { font-size: 1.8rem; }
+            .tool-card { padding: 20px; }
+            .tool-stats { gap: 10px; font-size: 0.8rem;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimal Top Bar with Close Button -->
+    <div class="top-bar">
+        <div class="site-name" onclick="window.location.href='/'">OrbitNova</div>
+        <a href="/" class="close-btn" title="Close Tool"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+
+    <div class="tool-container">
+        
+        <div class="badge"><i class="fa-solid fa-robot"></i> AI Tools > Content & SEO</div>
+        <h1 class="tool-title">AI Title Generator</h1>
+        <p class="tool-desc">Generate catchy, viral, and SEO-optimized titles for your YouTube videos and Blog posts instantly.</p>
+
+        <!-- SEO Tags -->
+        <div class="tags-container">
+            <span class="tag">#AITitle</span>
+            <span class="tag">#YouTubeSEO</span>
+            <span class="tag">#ContentCreator</span>
+            <span class="tag">#BlogTitles</span>
+        </div>
+
+        <!-- Main Working Card -->
+        <div class="tool-card">
+            <div class="input-wrapper">
+                <textarea id="t-input" placeholder="Type your topic here...&#10;Example: Best budget smartphones under 20k..."></textarea>
+            </div>
+            
+            <div class="tool-stats">
+                <span><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 12,500+ Uses</span>
+                <span><i class="fa-solid fa-bolt" style="color: #10b981;"></i> Instant Results</span>
+                <span><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> Privacy Friendly</span>
+            </div>
+
+            <button id="t-btn" class="gen-btn">
+                <span id="t-btn-txt">Generate Viral Titles</span>
+                <div class="spinner" id="t-spnr"></div>
+            </button>
+
+            <div class="skeleton-loader" id="skel-loader">
+                <div class="skel-line"></div>
+                <div class="skel-line"></div>
+                <div class="skel-line"></div>
+                <div class="skel-line"></div>
+            </div>
+
+            <div class="result-area" id="t-res-area">
+                <div class="res-header">
+                    <h3><i class="fa-solid fa-circle-check"></i> Generated Titles:</h3>
+                    <button class="copy-btn" id="t-copy" onclick="copyText()"><i class="fa-regular fa-copy"></i> Copy All</button>
+                </div>
+                <div class="result-text" id="t-out"></div>
+            </div>
+        </div>
+
+        <!-- Random Recommended Tools Section (ONLY AI TOOLS) -->
+        <div class="recommended-sec">
+            <h3>🔥 More AI Tools for You</h3>
+            <div class="tool-grid" id="random-tools">
+                <!-- Javascript will inject 6 random AI tools here -->
+            </div>
+        </div>
+
+        <div class="global-promo">
+            🎉 <strong>Did you know?</strong> OrbitNova has 300+ Premium AI & Utility Tools that are 100% FREE to use forever! <br> <a href="/">Explore All Tools Here 🚀</a>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 OrbitNova. Built for the future digital workspace.
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        /* === 1. ONLY AI TOOLS FOR RECOMMENDATION (Context Aware) === */
+        const aiToolsList = [
+            { name: "AI Tag Generator", desc: "Find trending SEO tags.", icon: "fa-tags", color: "bg-neon", url: "/ai-tag-generator" },
+            { name: "AI Description Gen", desc: "Write perfect SEO descriptions.", icon: "fa-align-left", color: "bg-neon", url: "/ai-description-generator" },
+            { name: "AI Blog Writer", desc: "Generate full SEO articles.", icon: "fa-pen-nib", color: "bg-neon", url: "/ai-blog-writer" },
+            { name: "AI Script Generator", desc: "Write engaging YouTube scripts.", icon: "fa-clapperboard", color: "bg-neon", url: "/ai-script-generator" },
+            { name: "AI Hashtag Gen", desc: "Get performing hashtags.", icon: "fa-hashtag", color: "bg-neon", url: "/ai-hashtag-generator" },
+            { name: "AI Keyword Gen", desc: "Extract main keywords.", icon: "fa-key", color: "bg-neon", url: "/ai-keyword-generator" },
+            { name: "AI Shorts Hook", desc: "Generate 3-second hooks.", icon: "fa-magnet", color: "bg-neon", url: "/ai-shorts-hook" },
+            { name: "AI Thumbnail Text", desc: "Clickable text for thumbnails.", icon: "fa-image", color: "bg-neon", url: "/ai-thumbnail-text" },
+            { name: "AI Viral Ideas", desc: "Get trending topic ideas.", icon: "fa-lightbulb", color: "bg-neon", url: "/ai-viral-video-ideas" },
+            { name: "AI Text Summarizer", desc: "Summarize long articles.", icon: "fa-compress", color: "bg-neon", url: "/ai-text-summarizer" },
+            { name: "AI Grammar Fixer", desc: "Correct English grammar.", icon: "fa-spell-check", color: "bg-neon", url: "/ai-grammar-fixer" },
+            { name: "AI Business Name", desc: "Generate brand names.", icon: "fa-building", color: "bg-blue", url: "/ai-business-name" }
+        ];
+
+        function refreshRecommendedTools() {
+            let container = document.getElementById('random-tools');
+            container.innerHTML = ''; 
+            
+            // Fisher-Yates Shuffle
+            let shuffled = [...aiToolsList].sort(() => 0.5 - Math.random());
+            let selected = shuffled.slice(0, 6);
+            
+            let html = '';
+            selected.forEach(tool => {
+                html += `
+                    <a href="${tool.url}" class="rec-card">
+                        <div class="rec-icon ${tool.color}"><i class="fa-solid ${tool.icon}"></i></div>
+                        <div class="rec-info">
+                            <h4>${tool.name}</h4>
+                            <p>${tool.desc}</p>
+                        </div>
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Run initially and then every 60 seconds (1 Min)
+        refreshRecommendedTools();
+        setInterval(refreshRecommendedTools, 60000);
+
+        /* === 2. COPY FUNCTION === */
+        function copyText() {
+            const txt = document.getElementById("t-out").innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                const btn = document.getElementById("t-copy");
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied All!`;
+                btn.style.color = "var(--primary)";
+                setTimeout(() => { 
+                    btn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy All`; 
+                    btn.style.color = "var(--text-dark)";
+                }, 2000);
+            });
+        }
+
+        /* === 3. ANTI-INSPECT SECURITY === */
+        document.addEventListener('contextmenu',e=>e.preventDefault());
+        document.onkeydown = function(e){
+            if(e.keyCode==123) return false;
+            if(e.ctrlKey && e.shiftKey) return false;
+            if(e.ctrlKey && (e.key === 'u' || e.key === 'U')) return false;
+        };
+
+        /* === 4. WORKING API LOGIC (Base64 Encoded to hide prompts from casual inspection) === */
+        const _a = atob("L2FwaS9ydW4tYWk="); // Endpt
+        const _s = atob("WW91IGFyZSBhbiBFeHBlcnQgU0VPIENvbnRlbnQgQ3JlYXRvci4gVGhlIHVzZXIgd2lsbCBnaXZlIGEgdG9waWMuIEdlbmVyYXRlIDUgaGlnaGx5IGVuZ2FnaW5nLCB2aXJhbCwgc2VvLW9wdGltaXplZCB0aXRsZXMuIE91dHB1dCBzdHJpY3RseSBhcyBhIG51bWJlcmVkIGxpc3QgKDEuIDIsIGV0Yy4pLiBEbyBub3Qgd3JpdGUgZXh0cmEgY29udmVyc2F0aW9uYWwgdGV4dC4="); // Prompt
+
+        document.getElementById('t-btn').addEventListener('click', async function() {
+            const inputVal = document.getElementById('t-input').value.trim();
+            if(!inputVal) { alert("Please enter a topic first!"); return; }
+
+            const btn = document.getElementById('t-btn');
+            const txt = document.getElementById('t-btn-txt');
+            const spinner = document.getElementById('t-spnr');
+            const skel = document.getElementById('skel-loader');
+            const resArea = document.getElementById('t-res-area');
+            const out = document.getElementById('t-out');
+
+            // Set Loading UI
+            btn.disabled = true;
+            txt.innerText = "Generating Magic...";
+            spinner.style.display = "block";
+            resArea.style.display = "none";
+            skel.style.display = "block";
+
+            try {
+                const response = await fetch(_a, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userPrompt: inputVal, systemPrompt: _s })
+                });
+
+                const data = await response.json();
+
+                if(response.ok && data.result) {
+                    out.innerText = data.result;
+                    skel.style.display = "none";
+                    resArea.style.display = "block";
+                } else {
+                    throw new Error(data.error || "Generation Failed");
+                }
+            } catch (err) {
+                alert("Server Connection Error: " + err.message + "\n(Please make sure your Vercel backend is deployed)");
+                skel.style.display = "none";
+            } finally {
+                btn.disabled = false;
+                txt.innerText = "Generate Viral Titles";
+                spinner.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
