@@ -1,49 +1,42 @@
 export default async function handler(req, res) {
-    // === Security Layer (CORS) ===
-    // Abhi test mode me hai, isliye "*" use kar rahe hain (Allow All). 
-    // Jab domain lenge, tab isko change karke specific domain dalenge.
+    // Sabhi domains allow karne ke liye
     res.setHeader('Access-Control-Allow-Origin', '*'); 
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-    // Handle preflight OPTIONS request
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
     try {
-        const { userPrompt, systemPrompt, model } = req.body;
+        const { userPrompt, systemPrompt } = req.body;
 
-        // Fetching API keys from Vercel Environment Variables
         const key1 = process.env.OPENROUTER_API_KEY_1;
         const key2 = process.env.OPENROUTER_API_KEY_2;
         const apiKeys = [key1, key2].filter(key => key); 
 
         if (apiKeys.length === 0) {
-            return res.status(500).json({ error: 'API Keys missing in server environment.' });
+            return res.status(500).json({ error: 'VERCEL ERROR: API Key Environment Variables me nahi mili.' });
         }
 
         let responseData = null;
         let success = false;
+        let exactOpenRouterError = "";
 
-        // Fallback Logic: Try keys one by one
+        // OpenRouter strict hai ki request kahan se aayi, isliye dynamically link bhejna zaroori hai
+        const siteUrl = req.headers.origin || req.headers.referer || "https://orbit-nova.vercel.app";
+
         for (let i = 0; i < apiKeys.length; i++) {
-            const currentKey = apiKeys[i];
             try {
                 const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
                     headers: {
-                        "Authorization": `Bearer ${currentKey}`,
+                        "Authorization": `Bearer ${apiKeys[i]}`,
                         "Content-Type": "application/json",
-                        "HTTP-Referer": "https://orbitnova.com", // Temporary identifier
-                        "X-Title": "OrbitNova Tools"
+                        "HTTP-Referer": siteUrl, 
+                        "X-Title": "OrbitNova"
                     },
                     body: JSON.stringify({
-                        model: model || "google/gemini-2.5-flash-free",
+                        model: "google/gemini-2.0-flash-exp:free", // Free Model
                         messages: [
                             { role: "system", content: systemPrompt || "You are a helpful assistant." },
                             { role: "user", content: userPrompt }
@@ -51,27 +44,29 @@ export default async function handler(req, res) {
                     })
                 });
 
-                if (response.ok) {
-                    responseData = await response.json();
+                const data = await response.json();
+
+                if (response.ok && data.choices) {
+                    responseData = data;
                     success = true;
-                    break; // Exit loop if successful
+                    break; 
                 } else {
-                    console.warn(`API Key ${i + 1} failed with status: ${response.status}`);
+                    // YAHAN SE ASLI ERROR PATA CHALEGA!
+                    exactOpenRouterError = data.error ? data.error.message : `HTTP Status: ${response.status}`;
                 }
             } catch (err) {
-                console.warn(`API Key ${i + 1} encountered an error:`, err);
+                exactOpenRouterError = err.message;
             }
         }
 
-        // Return successful data to frontend
-        if (success && responseData.choices && responseData.choices.length > 0) {
+        if (success) {
             return res.status(200).json({ result: responseData.choices[0].message.content });
         } else {
-            return res.status(500).json({ error: 'All API limits reached or network issue.' });
+            // Frontend ko real error send karega
+            return res.status(500).json({ error: `OPENROUTER REJECTED: ${exactOpenRouterError}` });
         }
 
     } catch (error) {
-        console.error("Backend Error:", error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return res.status(500).json({ error: 'SERVER LOGIC ERROR: ' + error.message });
     }
 }
